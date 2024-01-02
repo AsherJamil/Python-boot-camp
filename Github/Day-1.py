@@ -1,0 +1,5 @@
+print("Welcome to Name Generator")
+City = input("Which city you grow up in = \n")
+Pet  = input("What is the name of your pet = \n")
+print("The name of your band is =")
+print(City + " " + Pet)
