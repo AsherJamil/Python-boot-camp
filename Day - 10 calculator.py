@@ -14,7 +14,7 @@ logo = """
 | |___|___|___| |___| |  '----------------'  '----------------'  '----------------'  '----------------' 
 |_____________________|
 """
-
+import os
 def add(n1, n2):
   return n1 + n2
 
@@ -27,6 +27,8 @@ def multiply(n1, n2):
 def divide(n1, n2):
   return n1 / n2
 
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 operations = {
   "+": add,
   "-": subtract,
