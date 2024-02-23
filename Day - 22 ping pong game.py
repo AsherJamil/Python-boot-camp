@@ -16,13 +16,14 @@ class Paddle(Turtle):
         self.shapesize(stretch_wid=5, stretch_len=1)
         self.penup()
         self.goto(position)
+        self.move_speed = 20
 
     def go_up(self):
-        new_y = self.ycor() + 20
+        new_y = self.ycor() + self.move_speed
         self.goto(self.xcor(), new_y)
 
     def go_down(self):
-        new_y = self.ycor() - 20
+        new_y = self.ycor() - self.move_speed
         self.goto(self.xcor(), new_y)
 
 
@@ -89,10 +90,14 @@ l_Paddle = Paddle((-350, 0))
 scoreboard  = ScoreBoard()
 
 screen.listen()
-screen.onkey(r_Paddle.go_up, "Up")
-screen.onkey(r_Paddle.go_down, "Down")
-screen.onkey(l_Paddle.go_up, "w")
-screen.onkey(l_Paddle.go_down, "s")
+screen.onkeypress(r_Paddle.go_up, "Up")
+screen.onkeypress(r_Paddle.go_down, "Down")
+screen.onkeypress(l_Paddle.go_up, "w")
+screen.onkeypress(l_Paddle.go_down, "s")
+screen.onkeyrelease(r_Paddle.go_up, "Up")
+screen.onkeyrelease(r_Paddle.go_down, "Down")
+screen.onkeyrelease(l_Paddle.go_up, "w")
+screen.onkeyrelease(l_Paddle.go_down, "s")
 
 game_is_on = True
 while game_is_on:
