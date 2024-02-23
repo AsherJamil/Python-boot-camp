@@ -2,7 +2,6 @@ import time
 import random
 from turtle import Screen, Turtle
 
-
 FONT = ("Courier", 24, "normal")
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -16,28 +15,36 @@ STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
 
 class Player(Turtle):
-
     def __init__(self):
         super().__init__()
         self.shape("turtle")
         self.penup()
         self.go_to_start()
         self.setheading(90)
+        self.move_speed = MOVE_DISTANCE
 
     def go_up(self):
-        self.forward(MOVE_DISTANCE)
+        self.forward(self.move_speed)
+        
+    def  move_left(self):
+        self.left(30)
+        
+    def move_right(self):
+        self.right(30)
 
     def go_to_start(self):
         self.goto(STARTING_POSITION)
 
     def is_at_finish_line(self):
-        if self.ycor() > FINISH_LINE_Y:
-            return True
-        else:
-            return False
+        return self.ycor() > FINISH_LINE_Y
+
+    def increase_speed(self):
+        self.move_speed += MOVE_INCREMENT
+
+    def decrease_speed(self):
+        self.move_speed -= MOVE_INCREMENT
 
 class Scoreboard(Turtle):
-
     def __init__(self):
         super().__init__()
         self.level = 1
@@ -59,13 +66,12 @@ class Scoreboard(Turtle):
         self.write(f"GAME OVER", align="center", font=FONT)
 
 class CarManager:
-
     def __init__(self):
         self.all_cars = []
         self.car_speed = STARTING_MOVE_DISTANCE
 
     def create_car(self):
-        random_chance = random.randint(1, 6)
+        random_chance = random.randint(1, 7)
         if random_chance == 1:
             new_car = Turtle("square")
             new_car.shapesize(stretch_wid=1, stretch_len=2)
@@ -86,8 +92,10 @@ player = Player()
 car_manager = CarManager()
 scoreboard = Scoreboard()
 screen.listen()
-screen.onkey(player.go_up, "Up")
-
+screen.onkeypress(player.go_up, "Up")
+screen.onkeypress(player.move_left, "Left")
+screen.onkeypress(player.move_right, "Right")
+screen.onkeyrelease(player.decrease_speed, "Down") 
 
 game_is_on = True
 while game_is_on:
@@ -97,17 +105,16 @@ while game_is_on:
     car_manager.create_car()
     car_manager.move_cars()
 
-    #Detect collision with car
+    # Detect collision with car
     for car in car_manager.all_cars:
         if car.distance(player) < 20:
             game_is_on = False
             scoreboard.game_over()
 
-    #Detect successful crossing
+    # Detect successful crossing
     if player.is_at_finish_line():
         player.go_to_start()
         car_manager.level_up()
         scoreboard.increase_level()
-
 
 screen.exitonclick()
