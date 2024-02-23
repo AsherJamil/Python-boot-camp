@@ -7,7 +7,6 @@ screen.bgcolor("black")
 screen.title("Ping Pong game")
 screen.tracer(0)
 
-
 class Paddle(Turtle):
     def __init__(self, position):
         super().__init__()
@@ -25,7 +24,6 @@ class Paddle(Turtle):
     def go_down(self):
         new_y = self.ycor() - self.move_speed
         self.goto(self.xcor(), new_y)
-
 
 class Ball(Turtle):
     def __init__(self):
@@ -55,7 +53,6 @@ class Ball(Turtle):
         self.move_speed = 0.1
         self.x_move *= -1
         
-
 class ScoreBoard(Turtle):
     def __init__(self):
         super().__init__()
@@ -65,8 +62,7 @@ class ScoreBoard(Turtle):
         self.l_score = 0
         self.r_score = 0
         self.update_scoreboard()
-        
-    
+          
     def update_scoreboard(self):
         self.clear()
         self.goto(-100, 200)
@@ -81,8 +77,6 @@ class ScoreBoard(Turtle):
     def r_point(self):
         self.r_score +=1
         self.update_scoreboard()
-
-
 
 ball = Ball()
 r_Paddle = Paddle((350, 0))
@@ -112,15 +106,13 @@ while game_is_on:
     #dtect collision with paddle
     if (ball.distance(r_Paddle) < 50 and ball.xcor() > 320) or (ball.distance(l_Paddle) < 50 and ball.xcor() < -320):
         ball.bounce_x()
-
-        
+       
     if ball.xcor() > 380:
         ball.reset_position()
         scoreboard.l_point()
-        
+               
     if  ball.xcor() < -380:
         ball.reset_position()
         scoreboard.r_point()
 
-   
 screen.exitonclick()
