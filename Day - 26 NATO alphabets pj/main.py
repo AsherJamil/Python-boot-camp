@@ -1,5 +1,3 @@
-
-
 import pandas
 
 data = pandas.read_csv("/python 100 days bootcamp/Github.git/Day - 26 NATO alphabets pj/nato_phonetic_alphabet.csv")
