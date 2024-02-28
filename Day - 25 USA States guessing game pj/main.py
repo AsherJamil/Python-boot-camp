@@ -23,7 +23,7 @@ t = turtle.Turtle()
 t.hideturtle()
 t.penup()
 
-while len(guessed_states) < 50 and lives > 0:
+while len(guessed_states) <= 51 and lives > 0:
     answer_state = screen.textinput(title=f"{len(guessed_states)}/50 States Correct, {lives} Lives Remaining", prompt="What's another state's name?")
     if answer_state == "Exit":
         missing_states = [state for state in all_states if state not in guessed_states]
@@ -42,7 +42,7 @@ while len(guessed_states) < 50 and lives > 0:
             t.goto(x + 20, y)  # Move the turtle to a new position after writing the state name
         else:
             lives -= 1
-            screen.title(f"{len(guessed_states)}/50 States Correct, {lives} Lives Remaining")
+            screen.title(f"{len(guessed_states)}/51 States Correct, {lives} Lives Remaining")
             if lives ==  0:
                 game_over()
 
