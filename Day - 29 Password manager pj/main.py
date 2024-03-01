@@ -64,8 +64,8 @@ Email_Username_label.grid(row=2,column=0)
 Password_label=Label(text="Password:")
 Password_label.grid(row=3,column=0)
 
-website_entry = Entry(width= 39)
-website_entry.grid(row=1,column=1,columnspan=2)
+website_entry = Entry(width= 21)
+website_entry.grid(row=1,column=1)
 website_entry.focus()
 
 Email_Username_entry = Entry(width = 39)
@@ -77,8 +77,12 @@ Password_entry.grid(row=3,column=1)
 
 Generate_password_Button = Button(text="Generate Password",command=Generate_Password)
 Generate_password_Button.grid(row=3,column=2)
+
 Add_button = Button(text ="Add",width=36,command=save)
 Add_button.grid(row=4, column=1,columnspan=2)
+
+search_button = Button(text="Search",width = 14)
+search_button.grid(row=1,column=2)
 
 window.mainloop()
 
