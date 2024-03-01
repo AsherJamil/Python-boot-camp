@@ -63,9 +63,6 @@ def save():
             Password_entry.delete(0, END)
     else:
         messagebox.showinfo("Error", "Please fill all fields")
-
-
-
         
 def search():
     website = website_entry.get()
@@ -80,7 +77,6 @@ def search():
     else:
         messagebox.showinfo("Error", "Website not found")
     
-
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = Tk()
