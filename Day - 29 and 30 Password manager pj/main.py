@@ -122,6 +122,3 @@ search_button = Button(text="Search",width = 14, command=search)
 search_button.grid(row=1,column=2)
 
 window.mainloop()
-
-
-
