@@ -46,15 +46,17 @@ def save():
     if len(website) != 0 and len(email) != 0 and len(password) != 0:
         confirmation = messagebox.askyesno(title="Confirmation", message="Are you sure about that?")
         if confirmation:
-            with open("Day - 29 Password manager pj/data.json", "a") as data_file:
+            with open("/python 100 days bootcamp/Github.git/Day - 29 and 30 Password manager pj/data.json", "a") as data_file:
                 json.dump(new_data, data_file,indent=4)
+                website_entry.delete(0,END)
+                Email_Username_entry.delete(0,"end")
     else:
         messagebox.showinfo("Error", "Please fill all fields")
         
 def search():
     website = website_entry.get()
 
-    with open("Day - 29 Password manager pj/data.json", "r") as data_file:
+    with open("/python 100 days bootcamp/Github.git/Day - 29 and 30 Password manager pj/data.json", "r") as data_file:
         data = json.load(data_file)
 
     if website in data:
@@ -72,7 +74,7 @@ window.title("MyPass")
 window.config(padx=50,pady=50)
 
 canvas = Canvas(width=200,height=200)
-logo =PhotoImage(file="Day - 29 Password manager pj/logo.png")
+logo =PhotoImage(file="/python 100 days bootcamp/Github.git/Day - 29 and 30 Password manager pj/logo.png")
 canvas.create_image(100,100,image=logo)
 canvas.grid(row=0,column=1)
 
