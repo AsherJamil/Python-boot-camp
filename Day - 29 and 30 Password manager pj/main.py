@@ -36,22 +36,36 @@ def save():
     website = website_entry.get()
     email = Email_Username_entry.get()
     password = Password_entry.get()
-    new_data = {
-        website :{
-            "Email" : email,
-            "password" : password,
-        }
-    }
-    
+
+    json_file_path = "/python 100 days bootcamp/Github.git/Day - 29 and 30 Password manager pj/data.json"
+
+    try:
+        with open(json_file_path, "r") as data_file:
+            try:
+                data = json.load(data_file)
+            except json.JSONDecodeError:
+                data = {}
+    except FileNotFoundError:
+        data = {}
+
     if len(website) != 0 and len(email) != 0 and len(password) != 0:
         confirmation = messagebox.askyesno(title="Confirmation", message="Are you sure about that?")
         if confirmation:
-            with open("/python 100 days bootcamp/Github.git/Day - 29 and 30 Password manager pj/data.json", "a") as data_file:
-                json.dump(new_data, data_file,indent=4)
-                website_entry.delete(0,END)
-                Email_Username_entry.delete(0,"end")
+            data[website] = {
+                "Email": email,
+                "password": password
+            }
+
+            with open(json_file_path, "w") as data_file:
+                json.dump(data, data_file, indent=4)
+
+            website_entry.delete(0, END)
+            Password_entry.delete(0, END)
     else:
         messagebox.showinfo("Error", "Please fill all fields")
+
+
+
         
 def search():
     website = website_entry.get()
