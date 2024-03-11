@@ -5,7 +5,7 @@ import time
 MY_EMAIL = "___YOUR_EMAIL_HERE____"
 MY_PASSWORD = "___YOUR_PASSWORD_HERE___"
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/onecall"
-api_key = "ff26523a15ee865d7d345192465a1be9"  # get new api key from openweather.org
+api_key = ""  # get new api key from openweather.org
 
 weather_params = {
     "lat": 31.520370,
