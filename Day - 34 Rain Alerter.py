@@ -1,8 +1,9 @@
 import requests
 import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+import time
 
+MY_EMAIL = "___YOUR_EMAIL_HERE____"
+MY_PASSWORD = "___YOUR_PASSWORD_HERE___"
 OWM_Endpoint = "https://api.openweathermap.org/data/2.5/onecall"
 api_key = "ff26523a15ee865d7d345192465a1be9"  # get new api key from openweather.org
 
@@ -26,26 +27,14 @@ for hour_data in weather_slice:
         will_rain = True
         break
 
+
 if will_rain:
-    # Email configuration
-    sender_email = "your_email@gmail.com"  # Replace with your email
-    sender_password = "your_password"  # Replace with your email password
-    receiver_email = "your_email@gmail.com"  # Replace with your email
-
-    # Create message
-    message = MIMEMultipart()
-    message["From"] = sender_email
-    message["To"] = receiver_email
-    message["Subject"] = "Umbrella Reminder"
-
-    body = "Don't forget to bring an umbrella! It's going to rain in Lahore, Pakistan."
-
-    message.attach(MIMEText(body, "plain"))
-
-    # Connect to SMTP server and send email
-    with smtplib.SMTP("smtp.gmail.com", 587) as server:
-        server.starttls()
-        server.login(sender_email, sender_password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
-
-    print("Email sent successfully!")
+    time.sleep(60)
+    connection = smtplib.SMTP("__YOUR_SMTP_ADDRESS_HERE___")
+    connection.starttls()
+    connection.login(MY_EMAIL, MY_PASSWORD)
+    connection.sendmail(
+        from_addr=MY_EMAIL,
+        to_addrs=MY_EMAIL,
+        msg="Don't forget your umbrella!.It is going to rain"
+    )
