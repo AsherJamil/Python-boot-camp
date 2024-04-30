@@ -1,5 +1,0 @@
-print("Welcome to Name Generator")
-City = input("\nWhich city you grow up in = ")
-Pet  = input("\nWhat is the name of your pet = ")
-print("The name of your band is =")
-print(City + " " + Pet)
