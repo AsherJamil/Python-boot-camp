@@ -39,7 +39,8 @@ for link in all_link_elements:
         all_links.append(href)
 
 all_address_elements = soup.select(".list-card-info address")
-all_addresses = [address.get_text().split(" | ")[-1] for address in all_address_elements]
+all_addresses = [address.get_text().split(" | ")[-1]
+                 for address in all_address_elements]
 
 all_price_elements = soup.select(".list-card-heading")
 all_prices = []
@@ -52,15 +53,18 @@ for element in all_price_elements:
         all_prices.append(price)
 
 for n in range(len(all_links)):
-    # Substitute your own Google Form URL here 👇
     driver.get('URL_TO_YOUR_GOOGLE_FORM')
-    
+
     try:
-        address_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')))
-        price_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')))
-        link_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')))
-        submit_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div/div')))
-        
+        address_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')))
+        price_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')))
+        link_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
+            (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')))
+        submit_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
+            (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div/div')))
+
         address_input.send_keys(all_addresses[n])
         price_input.send_keys(all_prices[n])
         link_input.send_keys(all_links[n])
