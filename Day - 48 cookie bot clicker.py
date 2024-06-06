@@ -50,14 +50,16 @@ while True:
             element_text = price.text
             if element_text:
                 try:
-                    cost = int(element_text.split("-")[1].strip().replace(",", ""))
+                    cost = int(element_text.split("-")
+                               [1].strip().replace(",", ""))
                     item_prices.append(cost)
                 except ValueError:
                     # Ignore any b elements that do not contain valid prices
                     continue
 
         # Create a dictionary of store items and prices
-        cookie_upgrades = {item_prices[n]: item_ids[n] for n in range(len(item_prices))}
+        cookie_upgrades = {item_prices[n]: item_ids[n]
+                           for n in range(len(item_prices))}
 
         # Get current cookie count
         money_element = driver.find_element(By.ID, "cookies").text.split()[0]
@@ -66,7 +68,8 @@ while True:
         cookie_count = int(money_element)
 
         # Find upgrades that we can currently afford
-        affordable_upgrades = {cost: id for cost, id in cookie_upgrades.items() if cookie_count > cost}
+        affordable_upgrades = {
+            cost: id for cost, id in cookie_upgrades.items() if cookie_count > cost}
 
         if affordable_upgrades:
             # Purchase the most expensive affordable upgrade
