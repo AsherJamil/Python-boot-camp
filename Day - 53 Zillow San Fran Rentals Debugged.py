@@ -52,25 +52,5 @@ for element in all_price_elements:
     finally:
         all_prices.append(price)
 
-for n in range(len(all_links)):
-    driver.get('URL_TO_YOUR_GOOGLE_FORM')
-
-    try:
-        address_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')))
-        price_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')))
-        link_input = WebDriverWait(driver, 10).until(EC.presence_of_element_located(
-            (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')))
-        submit_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable(
-            (By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div/div')))
-
-        address_input.send_keys(all_addresses[n])
-        price_input.send_keys(all_prices[n])
-        link_input.send_keys(all_links[n])
-        submit_button.click()
-        time.sleep(2)  # Add a delay to avoid overwhelming the server
-    except Exception as e:
-        print(f"An error occurred: {e}")
 
 driver.quit()
