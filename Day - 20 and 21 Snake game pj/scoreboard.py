@@ -8,7 +8,7 @@ class Scoreboard(Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
-        with open("/python 100 days bootcamp/Github.git/Day - 20 and 21 Snake game pj/data.txt") as data:
+        with open("D:/python bootcamp/Python-boot-camp/Day - 20 and 21 Snake game pj/data.txt") as data:
             self.high_score = int(data.read())
         self.color("white")
         self.penup()
@@ -18,12 +18,13 @@ class Scoreboard(Turtle):
 
     def update_scoreboard(self):
         self.clear()
-        self.write(f"Score: {self.score}" + " " + f"High score: {self.high_score}", align=ALIGNMENT, font=FONT)
+        self.write(f"Score: {self.score}" + " " +
+                   f"High score: {self.high_score}", align=ALIGNMENT, font=FONT)
 
     def reset(self):
         if self.score > self.high_score:
             self.high_score = self.score
-            with open ("/python 100 days bootcamp/Github.git/Day - 20 and 21 Snake game pj/data.txt", mode = "w") as data:
+            with open("/python 100 days bootcamp/Github.git/Day - 20 and 21 Snake game pj/data.txt", mode="w") as data:
                 data.write(f"{self.high_score}")
         self.score = 0
         self.update_scoreboard()
