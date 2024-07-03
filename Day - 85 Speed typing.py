@@ -12,15 +12,16 @@ class TypingSpeedTestApp:
         self.root.title("Typing Speed Test")
 
         self.sample_label = tk.Label(
-            root, text=sample_text, wraplength=400, font=("Helvetica", 14))
+            root, text=sample_text, wraplength=400, font=("[Time New Roman]", 14))
         self.sample_label.pack(pady=20)
 
         self.entry = tk.Text(root, height=5, width=50,
-                             wrap='word', font=("Helvetica", 14))
+                             wrap='word', font=("[Time New Roman]", 14))
         self.entry.pack(pady=10)
         self.entry.bind('<KeyPress>', self.start_test)
 
-        self.result_label = tk.Label(root, text="", font=("Helvetica", 14))
+        self.result_label = tk.Label(
+            root, text="", font=("[Time New Roman]", 14))
         self.result_label.pack(pady=20)
 
         self.start_time = None
