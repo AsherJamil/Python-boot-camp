@@ -1,0 +1,180 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{% block title %}Cafe Finder{% endblock %}</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<style>
+			.cafe-card {
+				margin-bottom: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="{{ url_for('home') }}">Cafe Finder</a>
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('home') }}">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('add_cafe') }}">Add Cafe</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="container mt-4">{% block content %}{% endblock %}</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>
+
+<!-- index.html -->
+{% extends "base.html" %} {% block title %}Cafe Finder - Home{% endblock %} {%
+block content %}
+<h1 class="mb-4">Cafes with WiFi and Good Coffee</h1>
+<div class="row">
+	{% for cafe in cafes %}
+	<div class="col-md-4">
+		<div class="card cafe-card">
+			<img
+				src="{{ cafe.img_url }}"
+				class="card-img-top"
+				alt="{{ cafe.name }}"
+			/>
+			<div class="card-body">
+				<h5 class="card-title">{{ cafe.name }}</h5>
+				<p class="card-text">{{ cafe.location }}</p>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+						Sockets: {% if cafe.has_sockets %}Yes{% else %}No{% endif %}
+					</li>
+					<li class="list-group-item">
+						Toilet: {% if cafe.has_toilet %}Yes{% else %}No{% endif %}
+					</li>
+					<li class="list-group-item">
+						WiFi: {% if cafe.has_wifi %}Yes{% else %}No{% endif %}
+					</li>
+					<li class="list-group-item">
+						Calls: {% if cafe.can_take_calls %}Yes{% else %}No{% endif %}
+					</li>
+					<li class="list-group-item">Seats: {{ cafe.seats }}</li>
+					<li class="list-group-item">Coffee Price: {{ cafe.coffee_price }}</li>
+				</ul>
+				<a
+					href="{{ cafe.map_url }}"
+					class="btn btn-primary mt-2"
+					target="_blank"
+					>View on Map</a
+				>
+				<a
+					href="{{ url_for('delete_cafe', cafe_id=cafe.id) }}"
+					class="btn btn-danger mt-2"
+					onclick="return confirm('Are you sure you want to delete this cafe?')"
+					>Delete</a
+				>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}
+
+<!-- add.html -->
+{% extends "base.html" %} {% block title %}Cafe Finder - Add Cafe{% endblock %}
+{% block content %}
+<h1 class="mb-4">Add a New Cafe</h1>
+<form method="POST">
+	<div class="mb-3">
+		<label for="name" class="form-label">Name</label>
+		<input type="text" class="form-control" id="name" name="name" required />
+	</div>
+	<div class="mb-3">
+		<label for="map_url" class="form-label">Map URL</label>
+		<input
+			type="url"
+			class="form-control"
+			id="map_url"
+			name="map_url"
+			required
+		/>
+	</div>
+	<div class="mb-3">
+		<label for="img_url" class="form-label">Image URL</label>
+		<input
+			type="url"
+			class="form-control"
+			id="img_url"
+			name="img_url"
+			required
+		/>
+	</div>
+	<div class="mb-3">
+		<label for="location" class="form-label">Location</label>
+		<input
+			type="text"
+			class="form-control"
+			id="location"
+			name="location"
+			required
+		/>
+	</div>
+	<div class="mb-3 form-check">
+		<input
+			type="checkbox"
+			class="form-check-input"
+			id="has_sockets"
+			name="has_sockets"
+		/>
+		<label class="form-check-label" for="has_sockets">Has Sockets</label>
+	</div>
+	<div class="mb-3 form-check">
+		<input
+			type="checkbox"
+			class="form-check-input"
+			id="has_toilet"
+			name="has_toilet"
+		/>
+		<label class="form-check-label" for="has_toilet">Has Toilet</label>
+	</div>
+	<div class="mb-3 form-check">
+		<input
+			type="checkbox"
+			class="form-check-input"
+			id="has_wifi"
+			name="has_wifi"
+		/>
+		<label class="form-check-label" for="has_wifi">Has WiFi</label>
+	</div>
+	<div class="mb-3 form-check">
+		<input
+			type="checkbox"
+			class="form-check-input"
+			id="can_take_calls"
+			name="can_take_calls"
+		/>
+		<label class="form-check-label" for="can_take_calls">Can Take Calls</label>
+	</div>
+	<div class="mb-3">
+		<label for="seats" class="form-label">Seats</label>
+		<input type="text" class="form-control" id="seats" name="seats" />
+	</div>
+	<div class="mb-3">
+		<label for="coffee_price" class="form-label">Coffee Price</label>
+		<input
+			type="text"
+			class="form-control"
+			id="coffee_price"
+			name="coffee_price"
+		/>
+	</div>
+	<button type="submit" class="btn btn-primary">Add Cafe</button>
+</form>
+{% endblock %}
