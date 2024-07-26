@@ -53,6 +53,6 @@ def pdf_to_speech(pdf_path, output_file):
 
 # Example usage
 if __name__ == "__main__":
-    pdf_path = "path/to/your/pdf/file.pdf"
+    pdf_path = "path/to/your/pdf/file.pdf" #add your path
     output_file = "output_audio.mp3"
     pdf_to_speech(pdf_path, output_file)
