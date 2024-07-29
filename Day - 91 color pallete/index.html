@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Color Extractor</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 20px;
+			}
+			.color-box {
+				width: 100px;
+				height: 100px;
+				display: inline-block;
+				margin: 5px;
+				text-align: center;
+				line-height: 100px;
+				color: white;
+				text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Color Extractor</h1>
+		<input type="file" id="imageUpload" accept="image/*" />
+		<div id="results" style="margin-top: 20px"></div>
+
+		<script>
+			document
+				.getElementById("imageUpload")
+				.addEventListener("change", function (e) {
+					var file = e.target.files[0];
+					var formData = new FormData();
+					formData.append("image", file);
+
+					fetch("/extract_colors", {
+						method: "POST",
+						body: formData,
+					})
+						.then((response) => response.json())
+						.then((data) => {
+							var resultsDiv = document.getElementById("results");
+							resultsDiv.innerHTML = "<h2>Top 10 Colors:</h2>";
+							data.colors.forEach((color) => {
+								resultsDiv.innerHTML += `<div class="color-box" style="background-color: ${color}">${color}</div>`;
+							});
+							resultsDiv.innerHTML += `<h2>Uploaded Image:</h2><img src="data:image/png;base64,${data.image}" style="max-width: 100%;">`;
+						})
+						.catch((error) => console.error("Error:", error));
+				});
+		</script>
+	</body>
+</html>
