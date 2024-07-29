@@ -1,0 +1,48 @@
+{% extends "base.html" %} {% block title %}Cafe Finder - Add Cafe{% endblock %}
+{% block content %}
+<h1 class="mb-4">Add a New Cafe</h1>
+<form method="POST">
+	{{ form.hidden_tag() }}
+	<div class="mb-3">
+		{{ form.name.label(class="form-label") }} {{ form.name(class="form-control",
+		id="name") }}
+	</div>
+	<div class="mb-3">
+		{{ form.map_url.label(class="form-label") }} {{
+		form.map_url(class="form-control", id="map_url") }}
+	</div>
+	<div class="mb-3">
+		{{ form.img_url.label(class="form-label") }} {{
+		form.img_url(class="form-control", id="img_url") }}
+	</div>
+	<div class="mb-3">
+		{{ form.location.label(class="form-label") }} {{
+		form.location(class="form-control", id="location") }}
+	</div>
+	<div class="mb-3 form-check">
+		{{ form.has_sockets(class="form-check-input", id="has_sockets") }} {{
+		form.has_sockets.label(class="form-check-label") }}
+	</div>
+	<div class="mb-3 form-check">
+		{{ form.has_toilet(class="form-check-input", id="has_toilet") }} {{
+		form.has_toilet.label(class="form-check-label") }}
+	</div>
+	<div class="mb-3 form-check">
+		{{ form.has_wifi(class="form-check-input", id="has_wifi") }} {{
+		form.has_wifi.label(class="form-check-label") }}
+	</div>
+	<div class="mb-3 form-check">
+		{{ form.can_take_calls(class="form-check-input", id="can_take_calls") }} {{
+		form.can_take_calls.label(class="form-check-label") }}
+	</div>
+	<div class="mb-3">
+		{{ form.seats.label(class="form-label") }} {{
+		form.seats(class="form-control", id="seats") }}
+	</div>
+	<div class="mb-3">
+		{{ form.coffee_price.label(class="form-label") }} {{
+		form.coffee_price(class="form-control", id="coffee_price") }}
+	</div>
+	{{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}

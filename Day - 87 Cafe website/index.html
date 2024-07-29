@@ -1,0 +1,49 @@
+{% extends "base.html" %} {% block title %}Cafe Finder - Home{% endblock %} {%
+block content %}
+<h1 class="mb-4">Cafes with WiFi and Good Coffee</h1>
+<div class="row">
+	{% for cafe in cafes %}
+	<div class="col-md-4">
+		<div class="card cafe-card">
+			<img
+				src="{{ cafe.img_url }}"
+				class="card-img-top"
+				alt="{{ cafe.name }}"
+			/>
+			<div class="card-body">
+				<h5 class="card-title">{{ cafe.name }}</h5>
+				<p class="card-text">{{ cafe.location }}</p>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item">
+						Sockets: {% if cafe.has_sockets %}Yes{% else %}No{% endif %}
+					</li>
+					<li class="list-group-item">
+						Toilet: {% if cafe.has_toilet %}Yes{% else %}No{% endif %}
+					</li>
+					<li class="list-group-item">
+						WiFi: {% if cafe.has_wifi %}Yes{% else %}No{% endif %}
+					</li>
+					<li class="list-group-item">
+						Calls: {% if cafe.can_take_calls %}Yes{% else %}No{% endif %}
+					</li>
+					<li class="list-group-item">Seats: {{ cafe.seats }}</li>
+					<li class="list-group-item">Coffee Price: {{ cafe.coffee_price }}</li>
+				</ul>
+				<a
+					href="{{ cafe.map_url }}"
+					class="btn btn-primary mt-2"
+					target="_blank"
+					>View on Map</a
+				>
+				<a
+					href="{{ url_for('delete_cafe', cafe_id=cafe.id) }}"
+					class="btn btn-danger mt-2"
+					onclick="return confirm('Are you sure you want to delete this cafe?')"
+					>Delete</a
+				>
+			</div>
+		</div>
+	</div>
+	{% endfor %}
+</div>
+{% endblock %}
