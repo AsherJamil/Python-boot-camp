@@ -6,6 +6,9 @@ import os
 import shutil
 import time
 import schedule
+from chromedriver_py import binary_path
+
+CHROME_DRIVER_PATH = binary_path
 
 
 def organize_downloads():
@@ -43,7 +46,7 @@ def renew_library_books():
     driver = webdriver.Chrome()  # Make sure you have ChromeDriver installed and in PATH
     try:
         # Navigate to library website (replace with actual URL)
-        driver.get("https://your-library-website.com")
+        driver.get("CHROME_DRIVER_PATH")
 
         # Login (you'll need to replace these with actual element IDs or XPaths)
         username = driver.find_element(By.ID, "username")
